@@ -2,11 +2,10 @@ import { Fragment, useState } from "react";
 import styles from "./NavBar.module.css";
 
 function NavBar(initialVal) {
-  const [togNav, setTogNav] = useState(initialVal);
+  const [togNav, setTogNav] = useState(false);
 
   const navHandler = function () {
-    setTogNav(!initialVal);
-    console.log("Here am I");
+    setTogNav((prevtogNav) => !prevtogNav);
   };
   return (
     <Fragment>
@@ -19,19 +18,15 @@ function NavBar(initialVal) {
           <span className={styles.bar} />
           <span className={styles.bar} />
         </a>
-        <div
-          className={
-            togNav
-              ? styles["navbar-links"]
-              : styles['navbarLinks.classlist.toggle("active")']
-          }
-        >
-          <ul className={styles[".nav ul"]}>
-            <li className={styles[".nav li"]}>Home</li>
-            <li className={styles[".nav li"]}>Coming Soon</li>
-            <li className={styles[".nav li"]}>Contact</li>
-          </ul>
-        </div>
+        {togNav && (
+          <div className={styles["navbar-links"]}>
+            <ul className={styles[".nav ul"]}>
+              <li className={styles[".nav li"]}>Home</li>
+              <li className={styles[".nav li"]}>Coming Soon</li>
+              <li className={styles[".nav li"]}>Contact</li>
+            </ul>
+          </div>
+        )}
       </nav>
     </Fragment>
   );
